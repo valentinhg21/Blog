@@ -1,4 +1,4 @@
-const { conexion } = require("./database/connection");
+const { conexion } = require('./Database/connection')
 const express = require('express');
 const cors = require('cors')
 // Conectar a la DB
@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Crear rutas
-
+// app.use()
 
 // Crear servidor y escuchar peticiones HTTP
 app.listen(PORT, () => {
