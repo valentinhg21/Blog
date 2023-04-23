@@ -6,7 +6,7 @@ const ArticleSchema = Schema({
         type: String,
         required: true
     },
-    contenido:{
+    content:{
         type: String,
         required: true,
     },
@@ -22,4 +22,5 @@ const ArticleSchema = Schema({
 })
 
 // model hace referencia al nombre de la coleccion
-module.exports = model("article", ArticleSchema)
+// Tengo que usar este objecto en controller para usar las funciones de mongodb
+module.exports = model("Article", ArticleSchema, 'articles')
