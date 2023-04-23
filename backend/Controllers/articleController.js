@@ -1,5 +1,9 @@
 const validator = require('validator')
+// Article this is object where i have all the functions mongoose
 const Article = require("../Models/ArticleModel")
+
+
+// Create Article
 const createArticle =  (req, res) => {
     // GET PARAMS POST
     const {title, content } = req.body
@@ -17,31 +21,53 @@ const createArticle =  (req, res) => {
             message: `Faltan datos para enviar.` 
         })
     }
-
     // Create object
     const article = new Article(req.body)
 
 
     // Save article in DB
-    if(article.save()){
-        return res.status(200).json({
-            status: "sucess",
-            message: `Se guardo correctamente.`,
-            article: article
-        })
-    }else{
+    article.save()
+    .then((article) => {
+        if(article){
+            return res.status(200).json({
+                status: "sucess",
+                message: `Se guardo correctamente.`,
+                article: article
+            })
+        }
+
+    })
+    .catch((err) => {
         return res.status(400).json({
             status: "error",
             message: `No se pudo guardar el articulo en la db` 
         })
-    }
-  
+    })
 
+}
 
+// Get all Article
+const getArticles = (req, res ) => {
+    let query = Article.find()
+    query.then((articles) => {
+        if(articles){
+            return res.status(400).json({
+                status: "sucess",
+                articles
+            })
+        }
 
+    })
+    .catch((err) => {
+        return res.status(400).json({
+            status: "error",
+            message: `No se encontraron articulos en la db` 
+        })
+    })
 
 }
 
 module.exports = {
-    createArticle
+    createArticle,
+    getArticles
 }
