@@ -49,10 +49,23 @@ const createArticle =  (req, res) => {
 // Get all Article
 const getArticles = (req, res ) => {
     let query = Article.find()
+    if(req.params.limit){
+        query.limit(req.params.limit)
+    }
+    if(req.params.orderby){
+        let order = req.params.orderby.toLowerCase();
+        if(order === 'asc'){
+            query.sort({date: -1})
+        }else{
+            query.sort({date: 1})
+        }
+    
+    }
     query.then((articles) => {
         if(articles){
             return res.status(400).json({
                 status: "sucess",
+                count: articles.length,
                 articles
             })
         }
