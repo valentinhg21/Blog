@@ -63,7 +63,7 @@ const getArticles = (req, res ) => {
     }
     query.then((articles) => {
         if(articles){
-            return res.status(400).json({
+            return res.status(200).json({
                 status: "sucess",
                 count: articles.length,
                 articles
@@ -80,7 +80,54 @@ const getArticles = (req, res ) => {
 
 }
 
+const getArticle = (req, res ) => {
+   let id = req.params.id
+
+   let query = Article.findById(id)
+   
+   query.then((article) => {
+        if(article){
+            return res.status(200).json({
+                status: "sucess",
+                article
+            })
+        }
+   })
+   .catch((err) => {
+            return res.status(400).json({
+            status: "error",
+            message: `No se encontraró el articulo` 
+        })
+   })
+
+}
+
+const deleteArticle = (req, res) => {
+    let id = req.params.id
+
+    let query = Article.findOneAndDelete({_id: id})
+    
+    query.then((article) => {
+         if(article){
+             return res.status(200).json({
+                 status: "sucess",
+                 article: article,
+                 message: 'El articulo se elimino'
+             })
+         }
+    })
+    .catch((err) => {
+             return res.status(400).json({
+             status: "error",
+             message: `No se pudo eliminar el articulo.` 
+         })
+    })
+}
+
+
 module.exports = {
     createArticle,
-    getArticles
+    getArticles,
+    getArticle,
+    deleteArticle
 }
