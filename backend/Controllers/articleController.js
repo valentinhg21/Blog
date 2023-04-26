@@ -3,6 +3,7 @@
 const Article = require("../Models/ArticleModel")
 const { articleValidate } = require("../Helpers/Helpers")
 const fs = require("fs")
+const path = require("path")
 // Create Article
 const createArticle =  (req, res) => {
     let messageValidate = "Faltan agregar datos."
@@ -174,18 +175,90 @@ const upload = (req, res ) => {
             })
         })
     }else{
-        return res.status(200).json({
-            status: "success",
-    
-            files: req.file,
-            message: 'funciona'
+        let id = req.params.id
+        // Update article
+        const query = Article.findByIdAndUpdate({_id: id},{image: req.file.filename}, {new: true} )
+        query.then((article) => {
+            if(article){
+                return res.status(200).json({
+                    status: "success",
+                    article,
+                    message: 'La imagen se actualizó'
+                })
+            }
         })
+        .catch((err) => {
+            return res.status(400).json({
+                status: "error",
+                message: `No se pudo subir la imagen..` 
+            })
+        })
+        
+
     }
     // Si todo va bien, se actualiza el articulo.
 
 
+
 }
 
+const image  = (req, res) => {
+    let file = req.params.file
+
+    let pathRoot = "./img/articles/" + file
+    
+    fs.access(pathRoot, (err) => {
+        if(!err){
+            return res.sendFile(path.resolve(pathRoot))
+        }else{
+            return res.status(400).json({
+                status: "error",
+                pathRoot,
+                file,
+                message: `No existe la imagen.` 
+            })
+        }
+    })
+
+}
+
+const search = (req, res ) => {
+    // Sacar el string de busqueda
+    let queryString = req.params.query
+
+    // Find OR 
+    let query = Article.find({
+        "$or":[
+            {"title": {"$regex": queryString, "$options": "i"}},
+            {"content": {"$regex": queryString, "$options": "i"}}
+        ]
+    })
+    // Orden
+    query.sort({
+        date: -1
+    })
+
+    query.then((article) => {
+   
+        if(article){
+            return res.status(200).json({
+                status: "success",
+                article,
+                message: `No se encontró el articulo.` 
+            })
+        }
+    })
+    .catch((err) => {
+        return res.status(400).json({
+            status: "error",
+            queryString,
+            message: `No se encontró el articulo.` 
+        })
+    })
+    // Ejecutar consulta
+
+    // Devolver resultado
+}
 
 module.exports = {
     createArticle,
@@ -193,5 +266,7 @@ module.exports = {
     getArticle,
     deleteArticle,
     editArticle,
-    upload
+    upload,
+    image,
+    search
 }

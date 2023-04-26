@@ -6,7 +6,9 @@ const {
     getArticle,
     deleteArticle,
     editArticle, 
-    upload 
+    upload,
+    image,
+    search
 } = require('../Controllers/articleController.js')
 const router = Router();
 const storage = multer.diskStorage({
@@ -33,4 +35,10 @@ router.get("/article/:id", getArticle);
 router.delete("/article/:id", deleteArticle);
 router.put("/article/:id", editArticle);
 router.post("/upload-image/:id", [uploads.single("file")] ,upload);
+router.get("/image/:file" ,image);
+router.get("/search/:query" ,search);
+
+
+
+
 module.exports = router;
