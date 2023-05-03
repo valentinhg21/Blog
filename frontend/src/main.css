@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+
+}
+h1{
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1.2;
+}
+p{
+    font-weight: 500;
+    font-size: 20px;
+}
+a{
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+.App{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+@media only screen and (max-width: 600.5px) {
+    h1{
+
+        font-size: 28px;
+
+    }
+    p{
+        font-size: 16px;
+    }
+}

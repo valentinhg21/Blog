@@ -1,0 +1,41 @@
+.Container{
+    margin-top: 8rem;
+}
+.Homepage{
+    display: flex;
+    height: 100%;
+}
+.Homepage h1,
+.Homepage p{
+    margin-bottom: 1rem;
+}
+.Homepage h1{
+    max-width: 920px;
+    width: 100%;
+}
+
+.Homepage .Link{
+    margin-top: .5rem;
+    width: auto;
+    background-color: #1976d2;
+    color: #fff;
+    padding: 10px 20px;
+    transition:  .4s all ease-in-out;
+}
+.Homepage .Link:hover{
+    background-color: #1560ab;
+}
+.Homepage .Content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+@media only screen and (max-width: 600.5px) {
+    .Container{
+        margin-top: 6rem;
+    }
+    .Homepage h1{
+        width: 90%;
+    }
+}

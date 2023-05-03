@@ -1,0 +1,55 @@
+.SearchBar{
+
+    position: relative;
+    top: 64px;
+}
+.Search{
+    background: purple;
+    max-width: 300px;
+    display: flex;
+    position: relative;
+    border: 1px solid #eaeaea;
+    margin: 20px 0;
+}
+.Search > input{
+    outline: none;
+    border: 0;
+    width: 100%;
+    padding-left: 40px;
+    height: 40px;
+}
+.Search > button{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 12px;
+    border: none;
+    background-color: #1976d2;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition:  .4s all ease-in-out;
+}
+.Search > button:hover{
+    background-color: #1560ab;
+}
+.Search > .icon{
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    color: #6f6f6f;
+}
+
+@media only screen and (max-width: 600.5px) {
+    .SearchBar{
+        top: 48px;
+    }
+    .Search{
+        max-width: 255px;
+    }
+}
+@media only screen and (max-width: 531.5px) {
+    .SearchBar{
+        top: 56px;
+    }
+}
