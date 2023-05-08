@@ -37,6 +37,7 @@ const createArticle =  (req, res) => {
 
 // Get all Article
 const getArticles = (req, res ) => {
+
     let query = Article.find()
     if(req.params.limit){
         query.limit(req.params.limit)
