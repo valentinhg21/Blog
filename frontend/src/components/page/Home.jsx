@@ -8,7 +8,7 @@ export const Home = () => {
     <>
       <SearchBar />
       <Container maxWidth="xl" className="Container Homepage">
-        <div class="Content">
+        <div className="Content">
           <h1>
             Bienvenido Valentín al blog, creado con la tecnologia MERN (Mongo,
             Express, React, Node)
